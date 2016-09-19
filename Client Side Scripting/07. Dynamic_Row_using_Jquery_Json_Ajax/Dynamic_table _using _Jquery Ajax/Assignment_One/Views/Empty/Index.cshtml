@@ -1,0 +1,291 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<style>
+    table, td {
+        border: 1px solid green;
+        background-color: white;
+        color: black;
+    }
+</style>
+
+
+
+
+<form id="employeeForm">
+    <div class="container1"><div class="nameLabel">Name:</div><div class="nameText" id="eName"><input type="text" id="name" name="name" class="name"></div></div>
+    <div class="container2"><div class="emailLabel">Email:</div><div class="emailText" id="eEmail"><input type="text" id="email" name="email" class="email"></div></div>
+    <div class="container3"><div class="phoneLabel">Phone:</div><div class="phoneText" id="ePhone"><input type="text" id="phone" name="phone" class="phone"></div></div>
+    <div class="container4"><div class="addressLabel">Address:</div><div class="addressText" id="eAddress"><input type="text" id="address" name="address" class="address"> </div></div>
+
+</form>
+
+                  <div class="container5"> <input type="button" id="btnSave" value="Save" /> 
+                  <input type="button" id="btnSaveList" value="SaveList" /> </div><div id="demo"> </div>
+
+<fieldset>
+    <legend>Employee Show</legend>
+
+    <table id="tableEmployee">
+        <thead>
+            <tr>
+                <th>Name</th>&nbsp;
+                <th>Email</th>&nbsp;
+                <th>Phone</th>&nbsp;
+                <th>Address</th>&nbsp;
+                <th>Edit</th>&nbsp;
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+    </table>
+</fieldset>
+
+
+
+
+
+<script type="text/javascript">
+
+    var rowIndex = -1;
+    var employees = [];
+    
+
+    
+    $("#btnSave").click(function () {
+
+        var employee = {
+            "Name": $("#name").val(),
+            "Email": $("#email").val(),
+            "Phone": $("#phone").val(),
+            "Address": $("#address").val()
+        };
+
+        employees.push(employee);
+        
+        $.ajax({
+
+            type: "POST",
+            url: "@Url.Action("Save","Empty")",
+            data: employee,
+        datatype: "json",
+        success: function (data) {
+            addRow(data);
+        }
+    });
+    });
+
+
+
+
+    $("#btnSaveList").click(function () {
+
+        var employee = {
+            "Name": $("#name").val(),
+            "Email": $("#email").val(),
+            "Phone": $("#phone").val(),
+            "Address": $("#address").val()
+        };
+
+        employees.push(employee);
+        
+        $.ajax({
+
+            type: "POST",
+            url: "@Url.Action("SaveList","Empty")",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(employees),
+            }).done(function(respons) {
+
+                $.each(respons, function (i, employeeObj) {
+                addRow(employeeObj);
+            });       
+        });
+    });
+
+
+
+
+    function addRow(data) {
+
+        if (rowIndex == -1) {
+
+            var tr = '<tr>';
+            tr += "<td>" + data.Name + "</td>";
+            tr += "<td>" + data.Email + "</td>";
+            tr += "<td>" + data.Phone + "</td>";
+            tr += "<td>" + data.Address + "</td>";
+            tr += "<td><input type='button'  onClick='editData(this)' value='Edit'></td>";
+            tr += "<td><input type='button'  onclick='deleteData(this)' value='Delete'></td>";
+            tr += '</tr>';
+            $('#tableEmployee tbody').append(tr);
+        }
+
+        else {
+            var employee = {
+                Name: $("#name").val(),
+                Email: $("#email").val(),
+                Phone: $("#phone").val(),
+                Address: $("#address").val()
+            };
+            
+            tr = '<tr>';
+            tr += "<td>" + employee.Name + "</td>";
+            tr += "<td>" + employee.Email + "</td>";
+            tr += "<td>" + employee.Phone + "</td>";
+            tr += "<td>" + employee.Address + "</td>";
+            tr += "<td><input type='button' class='editButton' onClick='editData(this)' value='Edit'></td>";
+            tr += "<td><input type='button' class='deleteButton' onclick='deleteData(this)' value='Delete'></td>";
+            tr += '</tr>';
+            $('#tableEmployee > tbody > tr').eq(rowIndex).replaceWith(tr);
+            $("#name").val(''),
+            $("#email").val(''),
+            $("#phone").val(''),
+            $("#address").val('');
+            rowIndex = -1;
+
+        }
+
+    }
+
+
+
+
+    function editData(object) {
+
+        var button = $(object);
+
+
+        $("#name").val(''),
+        $("#email").val(''),
+        $("#phone").val(''),
+        $("#address").val('');
+        var $tr = button.parent().parent();
+
+        rowIndex = $tr.index();
+        var name = $tr.children("td").eq(0).text();
+        var email = $tr.children("td").eq(1).text();
+        var phone = $tr.children("td").eq(2).text();
+        var address = $tr.children("td").eq(3).text();
+
+        $("#name").val(name),
+        $("#email").val(email),
+        $("#phone").val(phone),
+        $("#address").val(address);
+    }
+
+
+
+
+    function deleteData(object) {
+        var button = $(object);
+        button.parent().parent().remove();
+    }
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

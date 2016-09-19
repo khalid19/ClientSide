@@ -1,0 +1,47 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+        var employees = [{ "Name": "Mahade", "Email": "Mahade@gmail.com", "Address": "Dhaka" },
+            { "Name": "Hasan", "Email": "hasan@gmail.com", "Address": "Barishal" },
+            { "Name": "Efat", "Email": "Efat@gmail.com", "Address": "Khulna" },
+            { "Name": "Rifat", "Email": "rifat@gmail.com", "Address": "Sylhet" }
+        ];
+
+        $(document).ready(function () {
+            $("#btnShow").click(function () {
+
+                var count = employees.length;
+                var msg = "";
+                for (var i = 0; i < count; i++) {
+                    msg += employees[i].Name + " " + employees[i].Email + " " + employees[i].Address + "<br/>";
+                }
+
+                document.getElementById("demo").innerHTML = msg;
+
+            });
+        });
+
+    </script>
+
+
+
+
+
+    <input type="button" id="btnShow" value="Show">
+    <div id="demo"></div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+
+        var employee =
+        {
+            "Name": "Mahade",
+            "Email": "Mahade@gmail.com",
+            "Address": "Dhaka"
+        };        
+
+
+        $(document).ready(function () {
+            $("#btnShow").click(function () {
+
+                var msg = employee.Name + " <br/>" + employee.Email + "<br/> " + employee.Address;
+                document.getElementById("demo").innerHTML = msg;
+
+            });
+        });
+
+    </script>
+ 
+    
+    
+
+      
+    <input type="button" id="btnShow" value="Show">
+    <div id="demo"></div>
+    
+
+
+</body>
+
+</html>

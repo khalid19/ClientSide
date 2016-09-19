@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+      
+
+        $(document).ready(function () {
+            
+            var employees = [];
+            
+            $("#btnSave").click(function () {
+                
+                var employee = {
+                               "Name": $("#name").val(),
+                               "Email": $("#email").val(),
+                               "Address":$("#address").val()
+                };
+                
+                employees.push(employee);
+                
+                $("#name").val("");
+                $("#email").val("");
+                $("#address").val("");
+            });
+
+
+            $("#btnShow").click(function () {
+
+                var count = employees.length;
+                var msg = "";
+                for (var i = 0; i < count; i++) {
+                    msg += employees[i].Name + " " + employees[i].Email + " " + employees[i].Address + "<br/>";
+                }
+
+                document.getElementById("demo").innerHTML = msg;
+
+
+            });
+        });
+
+    </script>
+
+    <div>
+        Name:<input type="text" id="name"><br/>
+        Email:<input type="text" id="email"><br/>
+        Address:<input type="text" id="address">
+    </div>
+
+    <input type="button" id="btnSave" value="Save"><br/>
+    <input type="button" id="btnShow" value="Show">
+    <div id="demo"></div>
+
+
+
+</body>
+
+</html>

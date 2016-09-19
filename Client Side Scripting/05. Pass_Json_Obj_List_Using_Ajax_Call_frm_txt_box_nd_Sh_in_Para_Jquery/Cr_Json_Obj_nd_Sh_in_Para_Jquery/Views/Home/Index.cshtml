@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+
+        var employees = [];
+
+        $(document).ready(function () {
+
+            $("#btnAdd").click(function () {
+
+                var employee = {
+                    "Name": $("#name").val(),
+                    "Email": $("#email").val(),
+                    "Address": $("#address").val()
+                };
+
+                employees.push(employee);
+
+                $("#name").val("");
+                $("#email").val("");
+                $("#address").val("");
+
+
+            });
+
+
+            $("#showListbtn").click(function () {
+                
+                $.ajax({
+
+                    type: "POST",
+                    url: "@Url.Action("SaveList","Home")",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(employees),
+
+                }).done(function (response) {
+
+                    $.each(response, function (i, employeeObj) {
+                        var msg = "";
+                        for ( i = 0; i < employees.length; i++) {
+                            msg += employees[i].Name +" "+ employees[i].Email + " " + employees[i].Address+" </br>";
+                        }                       
+                            document.getElementById("demo").innerHTML = msg;
+                    });
+                }); 
+
+            });
+
+          
+             });
+
+    </script>
+
+    <div>
+        Name:<input type="text" id="name"><br />
+        Email:<input type="text" id="email"><br />
+        Address:<input type="text" id="address">
+    </div>
+
+    <input type="button" id="btnAdd" value="Save"><br />
+    <input type="button" id="showListbtn" value="Show List">
+
+    <div id="demo"></div>
+
+
+
+</body>
+
+</html>

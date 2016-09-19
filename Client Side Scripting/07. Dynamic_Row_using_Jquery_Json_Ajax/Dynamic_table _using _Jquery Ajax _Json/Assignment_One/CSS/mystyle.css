@@ -1,0 +1,82 @@
+﻿
+
+.header {
+    position: relative;
+    width: 1330px;
+    height: 50px;
+    border: 2px solid black;
+    background-color: aqua;
+    text-align: center;
+}
+
+
+.menuvar {
+    position: relative;
+    width: 1330px;
+    height: 50px;
+    border: 2px solid black;
+    background-color: salmon;
+    text-align: center;
+}
+
+
+.leftmenu {
+    position: relative;
+    width: 200px;
+    height: 400px;
+    border: 2px solid black;
+    background-color: darkkhaki;
+}
+
+
+.content {
+    position: relative;
+    margin-left: 250px;
+    margin-top: -400px;
+    width: 820px;
+    height: 395px;
+    border: 2px solid black;
+    float: left;
+}
+
+
+.rightmenu {
+    position: relative;
+    margin-left: 1130px;
+    margin-top: -400px;
+    width: 200px;
+    height: 400px;
+    border: 2px solid black;
+    background-color: darkgoldenrod;
+}
+
+.table {
+
+    position: relative;
+    margin-left: 1px;
+    border: 1px solid blue;
+}
+
+
+.footer {
+    position: relative;
+    width: 1330px;
+    height: 50px;
+    border: 2px solid black;
+    margin-top: 25px;
+    background-color: teal;
+    text-align: center;
+}
+
+
+
+
+
+
+.trData {
+
+
+    position: relative;
+    margin-left: 2px;
+    margin-top: 15px; 
+}

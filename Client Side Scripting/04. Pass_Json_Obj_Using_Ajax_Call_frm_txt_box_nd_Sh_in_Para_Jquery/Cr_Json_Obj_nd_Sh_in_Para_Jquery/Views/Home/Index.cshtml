@@ -1,0 +1,59 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            $("#btnAdd").click(function () {
+
+                var employee = {
+                    "Name": $("#name").val(),
+                    "Email": $("#email").val(),
+                    "Address": $("#address").val()
+                };
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "@Url.Action("Save","Home")",
+                    data: employee,
+                    datatype: "json",
+                    success: function (data) {
+                        alert(data.Name+" "+data.Email+" "+data.Address);
+                    }
+                });
+            });
+            
+            
+
+
+
+        });
+
+    </script>
+
+    <div>
+        Name:<input type="text" id="name"><br />
+        Email:<input type="text" id="email"><br />
+        Address:<input type="text" id="address">
+    </div>
+
+    <input type="button" id="btnAdd" value="Save"><br />
+    <div id="demo"></div>
+
+
+
+</body>
+
+</html>

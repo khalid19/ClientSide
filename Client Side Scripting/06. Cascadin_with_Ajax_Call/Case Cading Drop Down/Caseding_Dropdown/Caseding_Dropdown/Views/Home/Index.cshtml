@@ -1,0 +1,52 @@
+﻿@using Caseding_Dropdown.Models
+@model Caseding_Dropdown.ViewModel.DepartmentViewModel
+
+
+@using( Html.BeginForm())
+{
+<div class="form-group">
+    Select Department:
+    
+    
+     @Html.DropDownListFor(model => model.DepartmentId, Model.DepartmentSelectListItem, "-Select-", new { @class ="department",@action="Home/GetStudents"})
+   
+    <input type="submit" value="Find" />
+</div>
+}
+
+<div class="studentscontainer"></div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        
+        $(".department").on('change', function() {
+
+            var $this = $(this);
+            var departmentId = $this.val();        
+            var url = $this.attr('action');
+            var option = {
+                url: url,
+                data: { departmentId: departmentId },
+                type: 'get',
+                dataType: 'html'
+            };
+           
+            if ( departmentId> 0) {
+                $.ajax(option).done(function (respons) {            
+                    $('.studentscontainer').html(respons);                
+                });
+            }
+        });
+    });
+ 
+    </script>
+
+
+
+
+
+
+
+
+

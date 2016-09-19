@@ -1,0 +1,80 @@
+﻿@model Form_Serialize.Models.Student
+
+
+@{
+    ViewBag.Title = "Form Submission";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      
+
+        var form = null;
+
+        $("#btnSave").click(function () {
+
+            form = $('#formId');
+
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "POST",
+                url: "@Url.Action("Save","Home")",
+                data: form.serialize(),
+                success: function (data) {
+
+                    var student = data;                  
+                    $('#result').html(student.Name+"<br> "+student.Email+" <br>"+student.Phone+"<br> "+student.Address);
+
+                   
+                }
+
+            });
+
+        });
+    });
+
+</script>
+
+
+
+@using (Html.BeginForm("Save", "Home", FormMethod.Post, new { id = "formId" }))
+{
+
+    <table>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Name)</td>
+            <td>@Html.TextBoxFor(x => x.Name)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Email)</td>
+            <td>@Html.TextBoxFor(x => x.Email)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Phone)</td>
+            <td>@Html.TextBoxFor(x => x.Phone)</td>
+        </tr>
+
+
+        <tr>
+            <td>@Html.LabelFor(x => x.Address)</td>
+            <td>@Html.TextBoxFor(x => x.Address)</td>
+        </tr>
+
+    </table> 
+}
+
+<tr>
+    <td><input type="submit" value="Submit" id="btnSave"></td>
+</tr>
+
+<div id="result"></div>
